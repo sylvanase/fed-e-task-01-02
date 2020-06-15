@@ -1,26 +1,153 @@
-# fed-e-task-01-02
-## 1、引用计数的原理和优缺点
+# pages-boilerplate
 
-解答：设置引用数，通过判断引用数是否为0，来决定是否将其回收，当引用关系发生变更时，引用计数发生变化，若变为0，表示该对象无引用，立即进行回收操作。
+[![Build Status][travis-image]][travis-url]
+[![Package Version][version-image]][version-url]
+[![License][license-image]][license-url]
+[![Dependency Status][dependency-image]][dependency-url]
+[![devDependency Status][devdependency-image]][devdependency-url]
+[![Code Style][style-image]][style-url]
 
-优点：发现垃圾会立即进行回收工作，可以最大限度减少程序暂停减少卡顿的时间。
+> Always a pleasure scaffolding your awesome static sites.
 
-缺点：如果对象存在循环引用，其引用数不会变为0，所以无法回收。因为要维护引用数，监控引用数的变化，所以资源消耗较大。
+## Getting Started
 
-## 2、标记整理算法的工作流程
+```shell
+# clone repo
+$ git clone https://github.com/zce/pages-boilerplate.git my-awesome-pages
+$ cd my-awesome-pages
+# install dependencies
+$ yarn # or npm install
+```
 
-解答：
-- 遍历所有对象，寻找标记活动对象
-- 遍历所有对象，对没有标记的对象进行整理、移动，使地址连续。
-- 清除没有标记的对象，将第一阶段的标记抹除。
+## Usage
 
-## 3、V8中新生代存储区垃圾回收流程
+```shell
+$ yarn <task> [options]
+```
 
-解答；
-- 使用标记整理，标记From空间中的活动对象
-- 整理后将活动对象拷贝至To空间，此过程中可能会出现晋升情况
-- From空间与To空间交换，完成垃圾回收，空间释放。
+### e.g.
 
-## 4、增量标记算法在何时使用及工作原理
+```shell
+# Runs the app in development mode
+$ yarn serve --port 5210 --open
+# Builds the app for production to the `dist` folder
+$ yarn build --production
+```
 
-解答：在老生代垃圾回收时使用增量标记算法，进行效率优化。将整块的垃圾回收过程拆分为多块，组合完成全部的垃圾回收，实现垃圾回收和程序执行交替进行。
+### Available Scripts
+
+#### `yarn lint` or `npm run lint`
+
+Lint the styles & scripts files.
+
+#### `yarn compile` or `npm run compile`
+
+Compile the styles & scripts & pages file.
+
+#### `yarn serve` or `npm run serve`
+
+Runs the app in development mode with a automated server.
+
+##### options
+
+- `open`: Open browser on start, Default: `false`
+- `port`: Specify server port, Default: `2080`
+
+#### `yarn build` or `npm run build`
+
+Builds the app for production to the `dist` folder. It minify source in production mode for the best performance.
+
+##### options
+
+- `production`: Production mode flag, Default: `false`
+- `prod`: Alias to `production`
+
+#### `yarn start` or `npm run start`
+
+Running projects in production mode.
+
+##### options
+
+- `open`: Open browser on start, Default: `false`
+- `port`: Specify server port, Default: `2080`
+
+#### `yarn deploy` or `npm run deploy`
+
+Deploy the `dist` folder to [GitHub Pages](https://pages.github.com).
+
+##### options
+
+- `branch`: The name of the branch you'll be pushing to, Default: `'gh-pages'`
+
+#### `yarn clean` or `npm run clean`
+
+Clean the `dist` & `temp` files.
+
+## Folder Structure
+
+```
+└── my-awesome-pages ································· project root
+   ├─ public ········································· static folder
+   │  └─ favicon.ico ································· static file (unprocessed)
+   ├─ src ············································ source folder
+   │  ├─ assets ······································ assets folder
+   │  │  ├─ fonts ···································· fonts folder
+   │  │  │  └─ pages.ttf ····························· font file (imagemin)
+   │  │  ├─ images ··································· images folder
+   │  │  │  └─ logo.png ······························ image file (imagemin)
+   │  │  ├─ scripts ·································· scripts folder
+   │  │  │  └─ main.js ······························· script file (babel / uglify)
+   │  │  └─ styles ··································· styles folder
+   │  │     ├─ _variables.scss ······················· partial sass file (dont output)
+   │  │     └─ main.scss ····························· entry scss file (scss / postcss)
+   │  ├─ layouts ····································· layouts folder
+   │  │  └─ basic.html ······························· layout file (dont output)
+   │  ├─ partials ···································· partials folder
+   │  │  └─ header.html ······························ partial file (dont output)
+   │  ├─ about.html ·································· page file (use layout & partials)
+   │  └─ index.html ·································· page file (use layout & partials)
+   ├─ .csscomb.json ·································· csscomb config file
+   ├─ .editorconfig ·································· editor config file
+   ├─ .gitignore ····································· git ignore file
+   ├─ .travis.yml ···································· travis ci config file
+   ├─ CHANGELOG.md ··································· repo changelog
+   ├─ LICENSE ········································ repo license
+   ├─ README.md ······································ repo readme
+   ├─ gulpfile.js ···································· gulp tasks file
+   ├─ package.json ··································· package file
+   └─ yarn.lock ······································ yarn lock file
+```
+
+## Related
+
+- [zce/x-pages](https://github.com/zce/x-pages) - A fully managed gulp workflow for static page sites.
+
+## Contributing
+
+1. **Fork** it on GitHub!
+2. **Clone** the fork to your own machine.
+3. **Checkout** your feature branch: `git checkout -b my-awesome-feature`
+4. **Commit** your changes to your own branch: `git commit -am 'Add some feature'`
+5. **Push** your work back up to your fork: `git push -u origin my-awesome-feature`
+6. Submit a **Pull Request** so that we can review your changes.
+
+> **NOTE**: Be sure to merge the latest from "upstream" before making a pull request!
+
+## License
+
+[MIT](LICENSE) &copy; [汪磊](https://zce.me)
+
+
+
+[travis-image]: https://img.shields.io/travis/zce/pages-boilerplate/master.svg
+[travis-url]: https://travis-ci.org/zce/pages-boilerplate
+[version-image]: https://img.shields.io/github/package-json/v/zce/pages-boilerplate/master.svg
+[version-url]: https://github.com/zce/pages-boilerplate
+[license-image]: https://img.shields.io/github/license/zce/pages-boilerplate.svg
+[license-url]: https://github.com/zce/pages-boilerplate/blob/master/LICENSE
+[dependency-image]: https://img.shields.io/david/zce/pages-boilerplate.svg
+[dependency-url]: https://david-dm.org/zce/pages-boilerplate
+[devdependency-image]: https://img.shields.io/david/dev/zce/pages-boilerplate.svg
+[devdependency-url]: https://david-dm.org/zce/pages-boilerplate?type=dev
+[style-image]: https://img.shields.io/badge/code_style-standard-brightgreen.svg
+[style-url]: http://standardjs.com
